@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Background/bg-stars.png" type="Texture" id=1]
+[ext_resource path="res://Screens/TitleAbout.gd" type="Script" id=2]
+[ext_resource path="res://Player/player1.png" type="Texture" id=3]
+[ext_resource path="res://Screens/PixelFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Screens/credits.png" type="Texture" id=5]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec2 direction = vec2(1.0, 0.0);
+uniform float speed_scale = 0.02;
+
+void fragment(){
+	vec2 move = direction * TIME * speed_scale;
+	COLOR = texture(TEXTURE, UV + move);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/direction = Vector2( 1, 0 )
+shader_param/speed_scale = 0.02
+
+[node name="World" type="Node"]
+script = ExtResource( 2 )
+
+[node name="BlackBacground" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.121569, 0.12549, 0.12549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Node" parent="."]
+
+[node name="Stars" type="Sprite" parent="Background"]
+material = SubResource( 2 )
+z_index = 1
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Credits" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CreditsLabel" type="Label" parent="Credits"]
+visible = false
+margin_right = 580.0
+margin_bottom = 909.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = ExtResource( 4 )
+text = "Special Thanks to
+my Patreon Supporters:
+
+Gnoll
+Tobias Edvardsen
+LeeNanHo
+Davis
+MyQly
+
+
+And...
+
+aSpuriousProgrammer
+Identifier Nehrk
+Boscayolo
+ムーンシャドー 徐
+Arthur Yarbrough
+ClassyCrustatio
+Alex
+Rxtje
+Emily P.
+fan_of_shera
+Jeremy Seay
+Qwerty Dvorak
+Jon Silvera
+Alex Damhuis
+Ander Wolf
+Stefano McValdemar Cinghialotto
+Brandon Morris
+C W
+hyperstitious
+Philip Rushik
+Enginy
+Alex
+Hayden Jacob Baldwin
+Javier Nandin Dominguez
+Matthew D Moores
+David Ang
+TTT
+Cesar Guirao
+Thomas
+Zach Breman
+Michael Bacon
+Jason McMillen
+Sean Barrett
+ArcadeDragon
+
+All Artwork, Music and Code by Luis Zuno aka Ansimuz"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="credits" type="Sprite" parent="Credits"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="BackOption" type="Node" parent="."]
+
+[node name="Pointer" type="Sprite" parent="BackOption"]
+position = Vector2( 206.875, 149.375 )
+z_index = 2
+texture = ExtResource( 3 )
+
+[node name="BackLabel" type="Label" parent="BackOption"]
+margin_left = 226.75
+margin_top = 141.375
+margin_right = 264.75
+margin_bottom = 157.375
+custom_fonts/font = ExtResource( 4 )
+text = "BACK"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

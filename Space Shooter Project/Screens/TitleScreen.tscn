@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Background/bg-stars.png" type="Texture" id=2]
+[ext_resource path="res://Player/player1.png" type="Texture" id=4]
+[ext_resource path="res://Screens/TitleScreen.gd" type="Script" id=5]
+[ext_resource path="res://Screens/PixelFont.tres" type="DynamicFont" id=6]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec2 direction = vec2(1.0, 0.0);
+uniform float speed_scale = 0.02;
+
+void fragment(){
+	vec2 move = direction * TIME * speed_scale;
+	COLOR = texture(TEXTURE, UV + move);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/direction = Vector2( 1, 0 )
+shader_param/speed_scale = 0.02
+
+[node name="World" type="Node"]
+script = ExtResource( 5 )
+
+[node name="BlackBacground" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="Node" parent="."]
+
+[node name="Stars" type="Sprite" parent="Background"]
+material = SubResource( 2 )
+texture = ExtResource( 2 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Stars2" type="Sprite" parent="Background"]
+material = SubResource( 2 )
+texture = ExtResource( 2 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Pointer" type="Sprite" parent="."]
+position = Vector2( 88, 68 )
+texture = ExtResource( 4 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -18.0
+margin_bottom = 17.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Labels" type="Label" parent="CenterContainer"]
+margin_left = 112.0
+margin_right = 160.0
+margin_bottom = 35.0
+custom_fonts/font = ExtResource( 6 )
+text = "START
+ABOUT"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

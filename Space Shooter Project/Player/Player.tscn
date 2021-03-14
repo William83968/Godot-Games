@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Player/player2.png" type="Texture" id=1]
+[ext_resource path="res://Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://Player/player1.png" type="Texture" id=3]
+[ext_resource path="res://Player/player3.png" type="Texture" id=4]
+[ext_resource path="res://Shoot/flash.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 11.25, 4.375 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ) ],
+"loop": true,
+"name": "up",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "down",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 5 ), null ],
+"loop": false,
+"name": "default",
+"speed": 20.0
+}, {
+"frames": [  ],
+"loop": true,
+"name": "none",
+"speed": 5.0
+} ]
+
+[node name="Player" type="Area2D"]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.309359, 0.795494 )
+shape = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 2 )
+
+[node name="Flash" type="AnimatedSprite" parent="."]
+position = Vector2( 18, 1 )
+frames = SubResource( 3 )
+animation = "none"
+
+[node name="ShotPosition" type="Position2D" parent="."]
+position = Vector2( 25, 1 )
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

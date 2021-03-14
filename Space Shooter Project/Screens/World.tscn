@@ -1,0 +1,127 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://Background/bg-back.png" type="Texture" id=1]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://EnemySpawner/EnemySpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Background/bg-stars.png" type="Texture" id=4]
+[ext_resource path="res://Background/bg-planet.png" type="Texture" id=5]
+[ext_resource path="res://Sound/space-asteroids.ogg" type="AudioStream" id=6]
+[ext_resource path="res://Screens/World.gd" type="Script" id=7]
+[ext_resource path="res://ds_digital/DS-DIGII.TTF" type="DynamicFontData" id=8]
+[ext_resource path="res://Sound/fx/Beep_warning.wav" type="AudioStream" id=9]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform vec2 direction = vec2(1.0, 0.0);
+uniform float speed_scale = 0.01;
+
+void fragment(){
+	vec2 move = direction * TIME * speed_scale;
+	COLOR = texture(TEXTURE, UV + move);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/direction = Vector2( 1, 0 )
+shader_param/speed_scale = 0.01
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform vec2 direction = vec2(1.0, 0.0);
+uniform float speed_scale = 0.02;
+
+void fragment(){
+	vec2 move = direction * TIME * speed_scale;
+	COLOR = texture(TEXTURE, UV + move);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/direction = Vector2( 1, 0 )
+shader_param/speed_scale = 0.02
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform vec2 direction = vec2(1.0, 0.0);
+uniform float speed_scale = 0.03;
+
+void fragment(){
+	vec2 move = direction * TIME * speed_scale;
+	COLOR = texture(TEXTURE, UV + move);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/direction = Vector2( 1, 0 )
+shader_param/speed_scale = 0.03
+
+[sub_resource type="DynamicFont" id=7]
+size = 11
+font_data = ExtResource( 8 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="Background" type="Node" parent="."]
+
+[node name="Nebula" type="Sprite" parent="Background"]
+material = SubResource( 2 )
+position = Vector2( -0.208, 0 )
+z_index = -1
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Stars" type="Sprite" parent="Background"]
+material = SubResource( 4 )
+z_index = -1
+texture = ExtResource( 4 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Planet" type="Sprite" parent="Background"]
+material = SubResource( 6 )
+z_index = -1
+texture = ExtResource( 5 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 272, 160 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="EnemySpawner" parent="." instance=ExtResource( 3 )]
+position = Vector2( 282.75, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 38.5, 83.75 )
+
+[node name="FX_player" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = 5.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+
+[node name="Score_count" type="Label" parent="."]
+margin_left = 222.0
+margin_top = 0.664
+margin_right = 272.0
+margin_bottom = 25.664
+custom_fonts/font = SubResource( 7 )
+text = "
+"
+valign = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cooldown_timer" type="Timer" parent="."]
