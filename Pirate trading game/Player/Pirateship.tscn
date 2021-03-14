@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Images/Pirateship.png" type="Texture" id=1]
+
+[node name="Pirateship" type="Sprite"]
+position = Vector2( 793.887, 350.249 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, -320 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+limit_right = 1600
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -216.374, -95.363, -167.38, -73.8533, -123.962, -75.845, -92.4941, -93.7698, -29.5576, -85.4048, 227.762, -92.9731, 244.492, -131.611, 319.777, -148.341, 375.144, -197.734, 391.077, -165.469, 383.11, -106.915, 365.185, -97.3547, 361.999, -85.0066, 343.278, -70.6667, 329.336, -28.4438, 316.988, -11.3159, 301.852, 0.634033, 302.648, 10.5925, -92.8921, 34.8901, -121.173, 15.3721, -135.115, -4.14575, -139.895, -10.1208, -146.269, -8.52734, -184.508, -45.1738, -193.669, -36.4104, -205.619, -44.7754, -217.17, -55.5303, -226.332, -63.8953 )

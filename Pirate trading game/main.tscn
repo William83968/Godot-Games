@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+
+[node name="main" type="Panel"]
+margin_right = 1022.0
+margin_bottom = 598.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cash_label" type="Label" parent="."]
+margin_left = 35.5647
+margin_top = 16.25
+margin_right = 193.565
+margin_bottom = 50.25
+text = "Cash:$[250]"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="firm_label" type="Label" parent="."]
+margin_left = 446.768
+margin_top = 26.3638
+margin_right = 525.768
+margin_bottom = 57.3638
+text = "[FIRM LABEL]
+"

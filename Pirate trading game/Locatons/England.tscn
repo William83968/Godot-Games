@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Location.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Images/rudder.png" type="Texture" id=2]
+[ext_resource path="res://Locatons/England.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.5428, 31.7039 )
+
+[node name="England" instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Location" parent="." index="0"]
+text = "England"
+
+[node name="CollisionShape2D" parent="Area" index="0"]
+shape = SubResource( 1 )
+[connection signal="area_entered" from="Area" to="." method="_on_Area_area_entered"]
+[connection signal="mouse_entered" from="Area" to="." method="_on_Area_mouse_entered"]
