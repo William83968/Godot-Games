@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Stars.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Enemy_spawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/camera.gd" type="Script" id=4]
+[ext_resource path="res://scripts/HUD.gd" type="Script" id=5]
+[ext_resource path="res://sprites/armor.png" type="Texture" id=6]
+[ext_resource path="res://sprites/score.png" type="Texture" id=7]
+[ext_resource path="res://scripts/spr_score.gd" type="Script" id=8]
+[ext_resource path="res://fonts/m5x7.ttf" type="DynamicFontData" id=9]
+
+[sub_resource type="Animation" id=1]
+resource_name = "lose_health"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("spr_armor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 10, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 9 )
+
+[node name="World" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -65.0
+margin_top = -69.0
+margin_right = 1100.0
+margin_bottom = 656.0
+color = Color( 0.0117647, 0.0313726, 0.337255, 0.298039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stars" parent="." instance=ExtResource( 2 )]
+
+[node name="Enemy_spawner" parent="." instance=ExtResource( 3 )]
+
+[node name="camera" type="Camera2D" parent="."]
+anchor_mode = 0
+current = true
+script = ExtResource( 4 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 536.79, 509.605 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource( 5 )
+
+[node name="spr_armor" type="Sprite" parent="HUD"]
+scale = Vector2( 4, 3 )
+texture = ExtResource( 6 )
+centered = false
+hframes = 5
+frame = 4
+
+[node name="anim_player" type="AnimationPlayer" parent="HUD"]
+anims/lose_health = SubResource( 1 )
+
+[node name="spr_score" type="Sprite" parent="HUD"]
+position = Vector2( 931.058, 29.3359 )
+scale = Vector2( 4, 3 )
+texture = ExtResource( 7 )
+script = ExtResource( 8 )
+
+[node name="tex_score" type="Label" parent="HUD/spr_score"]
+margin_left = -20.0
+margin_top = -9.0
+margin_right = 21.0
+margin_bottom = 5.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

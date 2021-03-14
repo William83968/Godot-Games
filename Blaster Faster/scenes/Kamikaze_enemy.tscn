@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/Kamikaze_enemy.gd" type="Script" id=2]
+[ext_resource path="res://sprites/enemy_kamikaze.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 11.9327, 13.9011 )
+
+[node name="Kamikaze_enemy" instance=ExtResource( 1 )]
+position = Vector2( 185.25, -31.9664 )
+scale = Vector2( 2, 2 )
+script = ExtResource( 2 )
+armor = 1
+velocity = Vector2( 0, 20 )
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource( 3 )
+
+[node name="Shape" parent="." index="1"]
+position = Vector2( 0.0359039, 2.04654 )
+shape = SubResource( 1 )

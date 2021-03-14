@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/laser.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/laser_enemy.png" type="Texture" id=2]
+[ext_resource path="res://scripts/laser_enemy.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.62483, 7.01929 )
+
+[node name="laser_enemy" instance=ExtResource( 1 )]
+position = Vector2( 59.741, 34.2535 )
+scale = Vector2( 3, 2 )
+script = ExtResource( 3 )
+velocity = Vector2( 0, 15 )
+
+[node name="sprite" parent="." index="0"]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource( 1 )
+
+[node name="vis_notifier" parent="." index="2"]
+position = Vector2( 0.0116656, 1.66893e-06 )
+scale = Vector2( 0.464524, 0.701347 )
