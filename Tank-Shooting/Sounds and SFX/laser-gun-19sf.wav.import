@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/laser-gun-19sf.wav-d630b0344b384e6b438ed22fc15aaa11.sample"
+
+[deps]
+
+source_file="res://Sounds and SFX/laser-gun-19sf.wav"
+dest_files=[ "res://.import/laser-gun-19sf.wav-d630b0344b384e6b438ed22fc15aaa11.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
